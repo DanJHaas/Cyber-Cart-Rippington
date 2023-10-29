@@ -34,27 +34,44 @@ void setup() {
   pinMode(2, INPUT_PULLDOWN);
   pinMode(3, INPUT_PULLDOWN);
   pinMode(4, INPUT_PULLDOWN);
+  // display.setFont(u8x8_font_amstrad_cpc_extended_f);
+  display.setFont(u8g2_font_6x10_tf);
+  display.setFontRefHeightExtendedText();
+  display.setDrawColor(1);
+  display.setFontPosTop();
+  display.setFontDirection(0);
 
-  display.setFont(u8x8_font_amstrad_cpc_extended_f);    
-  display.setCursor(5,5);
+  display.setFontMode(true);
+  display.setDrawColor(1);
 
+  for (int j = 0; j < 12; j++)
+    {
+      for (int i = 0; i < 26; i++)
+      {
+        display.drawStr(i*5, j*6, random(1,3) > 1 ? "/" : "\\");
+      }
+    }
+  display.setBitmapMode(false);
+  display.drawXBM(0, 16, 128, 32, &*DefCube);
+  display.sendBuffer();
+  for(;;)
+  {}
 }
 
 void loop() {
   display.clearBuffer();
   if(digitalRead(2))
   {
-    eb.play();
+    // eb.play();
     // display.drawXBMP(0, 0, 128, 32, &*DefCube);
     display.sendBuffer();
   }else{
-    display.drawTriangle(2,2,64,64,110,20);
-    display.sendBuffer();
-  }
-  // nunchuck1.readData();
-  // display.clearBuffer();
   
-  // display.printf("Hi: %d :: %d", nunchuck1.values[1], nunchuck1.values[2]);
+  
+    
+  }
+
+
 }
 
 
