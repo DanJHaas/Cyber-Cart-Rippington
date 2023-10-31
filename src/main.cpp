@@ -34,8 +34,8 @@ void setup() {
   pinMode(2, INPUT_PULLDOWN);
   pinMode(3, INPUT_PULLDOWN);
   pinMode(4, INPUT_PULLDOWN);
-  // display.setFont(u8x8_font_amstrad_cpc_extended_f);
-  display.setFont(u8g2_font_6x10_tf);
+  display.setFont(u8g2_font_04b_03b_tr);
+  // display.setFont(u8g2_font_6x10_tf);
   display.setFontRefHeightExtendedText();
   display.setDrawColor(1);
   display.setFontPosTop();
@@ -44,13 +44,17 @@ void setup() {
   display.setFontMode(true);
   display.setDrawColor(1);
 
-  for (int j = 0; j < 12; j++)
+  for (int j = 0; j < 13; j++)
+  {
+    for (int i = 0; i < 26; i++)
     {
-      for (int i = 0; i < 26; i++)
-      {
-        display.drawStr(i*5, j*6, random(1,3) > 1 ? "/" : "\\");
-      }
+      delay(5);
+      display.drawStr(i * 5, j * 5, random(1, 10) > 4 ? "/" : random(1, 10) > 4 ? "|": "\\");
+      display.sendBuffer();
+
     }
+  }
+  delay(100);
   display.setBitmapMode(false);
   display.drawXBM(0, 16, 128, 32, &*DefCube);
   display.sendBuffer();
