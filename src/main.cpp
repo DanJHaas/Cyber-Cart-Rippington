@@ -1,32 +1,28 @@
-/**************************************************************************
- This is an example for our Monochrome OLEDs based on SSD1306 drivers
+/*
+ * ▲
+ * │ ██████╗ ███████╗███████╗ ██████╗██╗   ██╗██████╗ ███████╗
+ * │ ██╔══██╗██╔════╝██╔════╝██╔════╝██║   ██║██╔══██╗██╔════╝
+ * │ ██║  ██║█████╗  █████╗  ██║     ██║   ██║██████╔╝█████╗  
+ * │ ██║  ██║██╔══╝  ██╔══╝  ██║     ██║   ██║██╔══██╗██╔══╝  
+ * │ ██████╔╝███████╗██║     ╚██████╗╚██████╔╝██████╔╝███████╗
+ * │ ╚═════╝ ╚══════╝╚═╝      ╚═════╝ ╚═════╝ ╚═════╝ ╚══════╝
+ * ╞═════════════════════════════════════════════════════════►
+ * │ File Name: main
+ * │ Project: src
+ * │ Date: Thu Nov 02 2023
+ * │ Comment:
+ * ▼
+ */
 
- Pick one up today in the adafruit shop!
- ------> http://www.adafruit.com/category/63_98
-
- This example is for a 128x32 pixel display using I2C to communicate
- 3 pins are required to interface (two I2C and one reset).
-
- Adafruit invests time and resources providing this open
- source code, please support Adafruit and open-source
- hardware by purchasing products from Adafruit!
-
- Written by Limor Fried/Ladyada for Adafruit Industries,
- with contributions from the open source community.
- BSD license, check license.txt for more information
- All text above, and the splash screen below must be
- included in any redistribution.
- **************************************************************************/
 #include <Arduino.h>
 #include <SPI.h>
 #include <Wire.h>
-
 #include "media_sources.h"
-EyeBlink eb;
 
-void giveLine(void);
+// define animations
+EyeBlink eb(&display);
 
-int count;
+
 void setup() {
   Serial.begin(9600);
   display.begin();
@@ -34,8 +30,8 @@ void setup() {
   pinMode(2, INPUT_PULLDOWN);
   pinMode(3, INPUT_PULLDOWN);
   pinMode(4, INPUT_PULLDOWN);
-  display.setFont(u8g2_font_04b_03b_tr);
   // display.setFont(u8g2_font_6x10_tf);
+  display.setFont(u8g2_font_04b_03b_tr);
   display.setFontRefHeightExtendedText();
   display.setDrawColor(1);
   display.setFontPosTop();
@@ -48,44 +44,20 @@ void setup() {
   {
     for (int i = 0; i < 26; i++)
     {
-      delay(5);
-      display.drawStr(i * 5, j * 5, random(1, 10) > 4 ? "/" : random(1, 10) > 4 ? "|": "\\");
-      display.sendBuffer();
-
+      // display.drawStr(i * 5, j * 5, random(1, 10) > 4 ? "/" : random(1, 10) > 4 ? "|": "\\");
     }
   }
-  delay(100);
+
+  // for(;;){}
   display.setBitmapMode(false);
   display.drawXBM(0, 16, 128, 32, &*DefCube);
   display.sendBuffer();
-  for(;;)
-  {}
+  delay(250);
 }
 
 void loop() {
-  display.clearBuffer();
-  if(digitalRead(2))
-  {
-    // eb.play();
-    // display.drawXBMP(0, 0, 128, 32, &*DefCube);
-    display.sendBuffer();
-  }else{
-  
-  
-    
-  }
-
-
-}
-
-
-void giveLine()
-{
-  for(;;)
-  {
-
     delay(1000);
 
-  }
+    eb.play(0, 16);
 
 }

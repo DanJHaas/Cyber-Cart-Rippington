@@ -16,7 +16,6 @@
 #ifndef LCDCN_EYE_BLINK_
 #define LCDCN_EYE_BLINK_
 
-#include "animation.h"
 
 
 
@@ -212,13 +211,15 @@ uint8_t Frame4 [] = {
 class EyeBlink
 {
   public:
+    U8G2 display;
     int FrameTime = 25;
     bool mirror = true;
-    std::vector<int> Pos = {0, 16};
     std::vector<int> Size = {128, 32};
     std::vector<uint8_t*> Frames = {Frame1, Frame2, Frame3, Frame4};
     
-    EyeBlink(){
+    EyeBlink(U8G2* display){
+      this->display = *display;
+
       if(!mirror)
         return;
 
@@ -228,13 +229,13 @@ class EyeBlink
       }
     };
 
-    void play()
+    void play(u8g2_uint_t x, u8g2_uint_t y)
     {
       for(auto frame : this->Frames)
       {
-        display.clearBuffer();
-        display.drawXBMP(this->Pos[0], this->Pos[1], this->Size[0], this->Size[1], &*frame);
-        display.sendBuffer();
+        this->display.clearBuffer();
+        this->display.drawXBMP(x, y, this->Size[0], this->Size[1], &*frame);
+        this->display.sendBuffer();
         delay(this->FrameTime);
       }
     };
