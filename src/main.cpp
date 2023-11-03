@@ -24,6 +24,8 @@ U8G2_SH1106_128X64_NONAME_F_HW_I2C BScreen(U8G2_R0, /* reset=*/U8X8_PIN_NONE);
 #include "gfx/effects.h"
 #include "gfx/images.h"
 #include "gfx/eye_blink.h"
+
+// ui headers
 #include "ui/startup.h"
 
 // define animations
@@ -73,5 +75,6 @@ void setup() {
 void loop() {
     delay(1000);
     eb.play(0, 16);
-
+    createEffect(RANDOM_MAZE);
+    delay(500);
 }

@@ -46,6 +46,7 @@ void createEffect(int Effect)
 
 void RandomMaze()
 {
+  BScreen.clearBuffer();
   for (int j = 0; j < 13; j++)
   {
     for (int i = 0; i < 26; i++)
@@ -53,6 +54,7 @@ void RandomMaze()
       BScreen.drawStr(i * 5, j * 5, random(1, 10) > 4 ? "/" : random(1, 10) > 4 ? "|": "\\");
     }
   }
+  BScreen.sendBuffer();
 }
 
 #endif
