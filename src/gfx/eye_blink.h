@@ -13,13 +13,8 @@
  * │ Comment:
  * ▼
  */
-#ifndef LCDCN_EYE_BLINK_
-#define LCDCN_EYE_BLINK_
-
-
-
-
-
+#ifndef CCR_EYE_BLINK_
+#define CCR_EYE_BLINK_
 
 
 uint8_t Frame1 [] = {
@@ -207,19 +202,15 @@ uint8_t Frame4 [] = {
 };
 
 
-
 class EyeBlink
 {
   public:
-    U8G2 display;
     int FrameTime = 25;
     bool mirror = true;
     std::vector<int> Size = {128, 32};
     std::vector<uint8_t*> Frames = {Frame1, Frame2, Frame3, Frame4};
     
-    EyeBlink(U8G2* display){
-      this->display = *display;
-
+    EyeBlink(){
       if(!mirror)
         return;
 
@@ -233,9 +224,9 @@ class EyeBlink
     {
       for(auto frame : this->Frames)
       {
-        this->display.clearBuffer();
-        this->display.drawXBMP(x, y, this->Size[0], this->Size[1], &*frame);
-        this->display.sendBuffer();
+        BScreen.clearBuffer();
+        BScreen.drawXBMP(x, y, this->Size[0], this->Size[1], &*frame);
+        BScreen.sendBuffer();
         delay(this->FrameTime);
       }
     };
@@ -246,4 +237,4 @@ class EyeBlink
 
 
 
-#endif // LCDCN_EYE_BLINK_
+#endif // CCR_EYE_BLINK_

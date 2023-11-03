@@ -14,8 +14,8 @@
  * ▼
  */
 
-#ifndef LCDCN_TEST_MEDIA_
-#define LCDCN_TEST_MEDIA_
+#ifndef CCR_IMAGES_
+#define CCR_IMAGES_
 
 
 // DEFCUBE
@@ -65,4 +65,4 @@ uint8_t DefCube [] = {
    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
 };
 
-#endif // LCDCN_TEST_MEDIA_
+#endif // CCR_TEST_MEDIA_

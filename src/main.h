@@ -7,17 +7,22 @@
  * │ ██████╔╝███████╗██║     ╚██████╗╚██████╔╝██████╔╝███████╗
  * │ ╚═════╝ ╚══════╝╚═╝      ╚═════╝ ╚═════╝ ╚═════╝ ╚══════╝
  * ╞═════════════════════════════════════════════════════════►
- * │ File Name: media_sources
- * │ Project: src
- * │ Date: Thu Oct 26 2023
+ * │ File Name: main
+ * │ Project: Cyber-Cart-Rippington
+ * │ Date: Fri Nov 03 2023
  * │ Comment:
  * ▼
  */
-#ifndef LCDCN_MEDIA_SOURCES_
-#define LCDCN_MEDIA_SOURCES_
+#ifndef CCR_MAIN_FUNCS_
+#define CCR_MAIN_FUNCS_
 
-#include "animations/animation.h"
-#include "animations/eye_blink.h"
-#include "animations/test_media.h"
+void setup();
+void loop();
+
+void BootIntro();
+
+void SetupPins();
+
+void BeginDisplay();
 
 #endif

@@ -7,71 +7,52 @@
  * │ ██████╔╝███████╗██║     ╚██████╗╚██████╔╝██████╔╝███████╗
  * │ ╚═════╝ ╚══════╝╚═╝      ╚═════╝ ╚═════╝ ╚═════╝ ╚══════╝
  * ╞═════════════════════════════════════════════════════════►
- * │ File Name: main
- * │ Project: src
+ * │ File Name: effects
+ * │ Project: animations
  * │ Date: Thu Nov 02 2023
  * │ Comment:
  * ▼
  */
+#ifndef CCR_DISPLAY_EFFECTS_
+#define CCR_DISPLAY_EFFECTS_
+//TODO: add screen animations for future use, fancy patterns, fractals, hardcoded animations <- saves on memory
 
-#include <SPI.h>
-#include <vector>
-#include <U8g2lib.h>
-
-U8G2_SH1106_128X64_NONAME_F_HW_I2C BScreen(U8G2_R0, /* reset=*/U8X8_PIN_NONE);
-
-// graphics headers
-#include "gfx/effects.h"
-#include "gfx/images.h"
-#include "gfx/eye_blink.h"
-#include "ui/startup.h"
-
-// define animations
-EyeBlink eb;
-
-
-void BootIntro()
+// list of Screen effects
+enum Effects
 {
-  BScreen.setBitmapMode(false);
-  BScreen.drawXBM(0, 16, 128, 32, &*DefCube);
-  BScreen.sendBuffer();
-  delay(BOOT_DELAY);
-}
+  RANDOM_MAZE
 
-void SetupPins()
+};
+
+// creates a screen wide effect
+void createEffect(int Effect);
+
+void RandomMaze();
+
+
+
+void createEffect(int Effect)
 {
-  pinMode(UP, INPUT_PULLDOWN);
-  pinMode(DOWN, INPUT_PULLDOWN);
-  pinMode(LEFT, INPUT_PULLDOWN);
-  pinMode(RIGHT, INPUT_PULLDOWN);
-  pinMode(SELECT, INPUT_PULLDOWN);
+  switch (Effect)
+  {
+  case RANDOM_MAZE:
+    RandomMaze();
+    break;
+  
+  default:
+    break;
+  }
 }
 
-void BeginDisplay()
+void RandomMaze()
 {
-  SetupPins();
-  BScreen.begin();
-  BootIntro();
+  for (int j = 0; j < 13; j++)
+  {
+    for (int i = 0; i < 26; i++)
+    {
+      BScreen.drawStr(i * 5, j * 5, random(1, 10) > 4 ? "/" : random(1, 10) > 4 ? "|": "\\");
+    }
+  }
 }
 
-
-
-void setup() {
-  Serial.begin(9600);
-  BeginDisplay();
-
-  BScreen.setFont(u8g2_font_04b_03b_tr);
-  BScreen.setFontRefHeightExtendedText();
-  BScreen.setDrawColor(1);
-  BScreen.setFontPosTop();
-  BScreen.setFontDirection(0);
-
-  BScreen.setFontMode(true);
-  BScreen.setDrawColor(1);
-}
-
-void loop() {
-    delay(1000);
-    eb.play(0, 16);
-
-}
+#endif

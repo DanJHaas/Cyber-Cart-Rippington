@@ -7,18 +7,27 @@
  * │ ██████╔╝███████╗██║     ╚██████╗╚██████╔╝██████╔╝███████╗
  * │ ╚═════╝ ╚══════╝╚═╝      ╚═════╝ ╚═════╝ ╚═════╝ ╚══════╝
  * ╞═════════════════════════════════════════════════════════►
- * │ File Name: animation
- * │ Project: animations
- * │ Date: Thu Oct 26 2023
+ * │ File Name: startup
+ * │ Project: ui
+ * │ Date: Thu Nov 02 2023
  * │ Comment:
  * ▼
  */
-#ifndef LCDCN_ANIMATION_GLUE_
-#define LCDCN_ANIMATION_GLUE_
+#ifndef CCR_UI_STARTUP_
+#define CCR_UI_STARTUP_
 
-#include <U8g2lib.h>
-#include <vector>
+#include <Wire.h>
 
-U8G2_SH1106_128X64_NONAME_F_HW_I2C display(U8G2_R0, /* reset=*/U8X8_PIN_NONE);
+#define BOOT_DELAY 250
+
+
+enum Buttons
+{
+  UP,
+  DOWN,
+  LEFT,
+  RIGHT,
+  SELECT
+};
 
 #endif
