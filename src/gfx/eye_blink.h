@@ -15,7 +15,7 @@
  */
 #ifndef CCR_EYE_BLINK_
 #define CCR_EYE_BLINK_
-
+#include "common.h"
 
 uint8_t Frame1 [] = {
 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -205,12 +205,14 @@ uint8_t Frame4 [] = {
 class EyeBlink
 {
   public:
+    Display disp;
     int FrameTime = 25;
     bool mirror = true;
     std::vector<int> Size = {128, 32};
     std::vector<uint8_t*> Frames = {Frame1, Frame2, Frame3, Frame4};
     
-    EyeBlink(){
+    EyeBlink(Display* disp){
+      this->disp = *disp;
       if(!mirror)
         return;
 
@@ -224,9 +226,9 @@ class EyeBlink
     {
       for(auto frame : this->Frames)
       {
-        BScreen.clearBuffer();
-        BScreen.drawXBMP(x, y, this->Size[0], this->Size[1], &*frame);
-        BScreen.sendBuffer();
+        disp.BScreen.clearBuffer();
+        disp.BScreen.drawXBMP(x, y, this->Size[0], this->Size[1], &*frame);
+        disp.BScreen.sendBuffer();
         delay(this->FrameTime);
       }
     };

@@ -7,19 +7,18 @@
  * │ ██████╔╝███████╗██║     ╚██████╗╚██████╔╝██████╔╝███████╗
  * │ ╚═════╝ ╚══════╝╚═╝      ╚═════╝ ╚═════╝ ╚═════╝ ╚══════╝
  * ╞═════════════════════════════════════════════════════════►
- * │ File Name: startup
- * │ Project: ui
- * │ Date: Thu Nov 02 2023
+ * │ File Name: ui
+ * │ Project: src
+ * │ Date: Fri Nov 03 2023
  * │ Comment:
  * ▼
  */
-#ifndef CCR_UI_STARTUP_
-#define CCR_UI_STARTUP_
+#ifndef CCR_UI_HELPER_
+#define CCR_UI_HELPER_
 
-#include <Wire.h>
+#include "common.h"
 
 #define BOOT_DELAY 250
-
 
 enum Buttons
 {
@@ -29,5 +28,11 @@ enum Buttons
   RIGHT,
   SELECT
 };
+
+void BootIntro(Display* disp);
+
+void SetupPins();
+
+void BeginDisplay(Display* disp);
 
 #endif

@@ -7,52 +7,37 @@
  * │ ██████╔╝███████╗██║     ╚██████╗╚██████╔╝██████╔╝███████╗
  * │ ╚═════╝ ╚══════╝╚═╝      ╚═════╝ ╚═════╝ ╚═════╝ ╚══════╝
  * ╞═════════════════════════════════════════════════════════►
- * │ File Name: main
+ * │ File Name: ui
  * │ Project: src
- * │ Date: Thu Nov 02 2023
+ * │ Date: Fri Nov 03 2023
  * │ Comment:
  * ▼
  */
-
-#include <SPI.h>
-#include <vector>
-#include <U8g2lib.h>
-
-
-
-// graphics headers
-#include "common.h"
+#include <Wire.h>
 #include "ui.h"
-// #include "gfx/images.h"
-#include "gfx/effects.h"
-#include "gfx/eye_blink.h"
-// ui headers
+#include "gfx/images.h"
 
-// define animations
-Display disp;
-EyeBlink eb(&disp);
 
-void setup() {
-  Serial.begin(9600);
-  BeginDisplay(&disp);
-  
-  disp.BScreen.setFont(u8g2_font_04b_03b_tr);
-  disp.BScreen.setFontRefHeightExtendedText();
-  disp.BScreen.setDrawColor(1);
-  disp.BScreen.setFontPosTop();
-  disp.BScreen.setFontDirection(0);
-
-  disp.BScreen.setFontMode(true);
-  disp.BScreen.setDrawColor(1);
+void BootIntro(Display* disp)
+{
+  disp->BScreen.setBitmapMode(false);
+  disp->BScreen.drawXBM(0, 16, 128, 32, &*DefCube);
+  disp->BScreen.sendBuffer();
+  delay(BOOT_DELAY);
 }
 
-void loop() {
-    delay(1000);
-    eb.play(0, 16);
-    for (int i = 0; i < 200; i++)
-    {
-      createEffect(&disp, RANDOM_MAZE);
-      delay(50);
-    }
-    
+void SetupPins()
+{
+  pinMode(UP, INPUT_PULLDOWN);
+  pinMode(DOWN, INPUT_PULLDOWN);
+  pinMode(LEFT, INPUT_PULLDOWN);
+  pinMode(RIGHT, INPUT_PULLDOWN);
+  pinMode(SELECT, INPUT_PULLDOWN);
+}
+
+void BeginDisplay(Display* disp)
+{
+  SetupPins();
+  disp->BScreen.begin();
+  BootIntro(disp);
 }

@@ -7,22 +7,37 @@
  * │ ██████╔╝███████╗██║     ╚██████╗╚██████╔╝██████╔╝███████╗
  * │ ╚═════╝ ╚══════╝╚═╝      ╚═════╝ ╚═════╝ ╚═════╝ ╚══════╝
  * ╞═════════════════════════════════════════════════════════►
- * │ File Name: main
- * │ Project: Cyber-Cart-Rippington
- * │ Date: Fri Nov 03 2023
+ * │ File Name: effects
+ * │ Project: gfx
+ * │ Date: Sat Nov 04 2023
  * │ Comment:
  * ▼
  */
-#ifndef CCR_MAIN_FUNCS_
-#define CCR_MAIN_FUNCS_
 
-void setup();
-void loop();
+#include "effects.h"
 
-void BootIntro();
+void createEffect(Display* disp, int Effect)
+{
+  switch (Effect)
+  {
+  case RANDOM_MAZE:
+    RandomMaze(disp);
+    break;
+  
+  default:
+    break;
+  }
+}
 
-void SetupPins();
-
-void BeginDisplay();
-
-#endif
+void RandomMaze(Display* disp)
+{
+  disp->BScreen.clearBuffer();
+  for (int j = 0; j < 13; j++)
+  {
+    for (int i = 0; i < 26; i++)
+    {
+      disp->BScreen.drawStr(i * 5, j * 5, random(1, 10) > 4 ? "/" : random(1, 10) > 4 ? "|": "\\");
+    }
+  }
+  disp->BScreen.sendBuffer();
+}

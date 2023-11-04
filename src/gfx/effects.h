@@ -16,7 +16,7 @@
 #ifndef CCR_DISPLAY_EFFECTS_
 #define CCR_DISPLAY_EFFECTS_
 //TODO: add screen animations for future use, fancy patterns, fractals, hardcoded animations <- saves on memory
-
+#include "common.h"
 // list of Screen effects
 enum Effects
 {
@@ -25,36 +25,9 @@ enum Effects
 };
 
 // creates a screen wide effect
-void createEffect(int Effect);
+void createEffect(Display* disp, int Effect);
 
-void RandomMaze();
+void RandomMaze(Display* disp);
 
-
-
-void createEffect(int Effect)
-{
-  switch (Effect)
-  {
-  case RANDOM_MAZE:
-    RandomMaze();
-    break;
-  
-  default:
-    break;
-  }
-}
-
-void RandomMaze()
-{
-  BScreen.clearBuffer();
-  for (int j = 0; j < 13; j++)
-  {
-    for (int i = 0; i < 26; i++)
-    {
-      BScreen.drawStr(i * 5, j * 5, random(1, 10) > 4 ? "/" : random(1, 10) > 4 ? "|": "\\");
-    }
-  }
-  BScreen.sendBuffer();
-}
 
 #endif
