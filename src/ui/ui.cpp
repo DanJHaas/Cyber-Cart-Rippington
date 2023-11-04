@@ -15,7 +15,7 @@
  */
 #include <Wire.h>
 #include "ui.h"
-#include "gfx/images.h"
+#include "../gfx/images.h"
 
 
 void BootIntro(Display* disp)

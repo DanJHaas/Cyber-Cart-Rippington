@@ -13,11 +13,14 @@
  * │ Comment:
  * ▼
  */
+
 #ifndef CCR_DISPLAY_EFFECTS_
 #define CCR_DISPLAY_EFFECTS_
 //TODO: add screen animations for future use, fancy patterns, fractals, hardcoded animations <- saves on memory
 #include "common.h"
 // list of Screen effects
+
+
 enum Effects
 {
   RANDOM_MAZE
@@ -25,9 +28,24 @@ enum Effects
 };
 
 // creates a screen wide effect
-void createEffect(Display* disp, int Effect);
 
-void RandomMaze(Display* disp);
+class Effect
+{
+  private:
+    Display* disp;
+
+  public:
+    Effect(Display* disp)
+    {
+      this->disp = disp;
+    };
+    void createEffect(int Effect);
+
+  private:
+    void RandomMaze();
+
+};
+
 
 
 #endif

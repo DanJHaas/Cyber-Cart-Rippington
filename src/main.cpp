@@ -16,21 +16,22 @@
 
 #include <SPI.h>
 #include <vector>
-#include <U8g2lib.h>
 
 
+// screen include
+#include "common.h"
+
+// ui headers
+#include "ui/ui.h"
 
 // graphics headers
-#include "common.h"
-#include "ui.h"
-// #include "gfx/images.h"
 #include "gfx/effects.h"
 #include "gfx/eye_blink.h"
-// ui headers
 
-// define animations
+// define screen stuff
 Display disp;
 EyeBlink eb(&disp);
+Effect eff(&disp);
 
 void setup() {
   Serial.begin(9600);
@@ -51,7 +52,7 @@ void loop() {
     eb.play(0, 16);
     for (int i = 0; i < 200; i++)
     {
-      createEffect(&disp, RANDOM_MAZE);
+      eff.createEffect(RANDOM_MAZE);
       delay(50);
     }
     
