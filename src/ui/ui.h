@@ -16,7 +16,7 @@
 #ifndef CCR_UI_HELPER_
 #define CCR_UI_HELPER_
 
-#include "../common.h"
+#include "common.h"
 
 #define BOOT_DELAY 250
 

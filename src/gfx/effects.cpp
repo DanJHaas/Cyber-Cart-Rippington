@@ -21,7 +21,7 @@ void Effect::createEffect(int Effect)
   switch (Effect)
   {
   case RANDOM_MAZE:
-    RandomMaze();
+    this->RandomMaze();
     break;
   
   default:
